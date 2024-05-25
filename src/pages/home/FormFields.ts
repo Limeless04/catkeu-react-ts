@@ -8,7 +8,7 @@ const formFields = [
     {
         name: 'amount',
         label: 'Amount',
-        type: 'text',
+        type: 'number',
         validation: (value: string) => (value ? '' : 'Amount is required'),
     },
     // {

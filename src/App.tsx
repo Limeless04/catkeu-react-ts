@@ -24,7 +24,7 @@ function App() {
           <Navbar toggleSidebar={toggleSidebar} />
           <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
           <div style={{
-            flexGrow: 1, marginTop: "10px", marginLeft: isMobile ? "20px" : "10%", marginRight: isMobile ? "20px" : "10 % ", paddingTop: isMobile ? "60px" : "40px"
+            flexGrow: 1, marginTop: "10px", marginLeft: isMobile ? "10px" : "10%", marginRight: isMobile ? "10px" : "10% ", paddingTop: isMobile ? "60px" : "40px"
           }}>
             <Outlet />
           </div>
