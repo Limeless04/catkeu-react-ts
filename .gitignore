@@ -25,3 +25,4 @@ dist-ssr
 
 release_note
 .env
+.env.local

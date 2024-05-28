@@ -14,7 +14,9 @@
       "@utils/*": ["src/utils/*"],
       "@pages/*": ["src/pages/*"],
       "@styles/*":["src/styles/*"],
-      "@routes/*": ["src/routes/*"]
+      "@routes/*": ["src/routes/*"],
+      "@context/*": ["src/context/*"],
+      "@hooks/*": ["src/hooks/*"]
     },
 
     /* Bundler mode */
@@ -29,7 +31,8 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["node", "vite/client"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
