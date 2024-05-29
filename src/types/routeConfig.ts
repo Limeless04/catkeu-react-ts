@@ -1,8 +1,8 @@
-import { ReactElement } from 'react'
+import { ComponentType } from 'react'
 
 export interface RouteConfig {
     path: string,
-    element: ReactElement,
+    element: () => Promise<{ default: ComponentType<any> }>,
     label: string,
     auth?: boolean,
     icon?: string,

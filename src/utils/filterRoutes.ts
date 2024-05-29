@@ -10,6 +10,9 @@ const filterRoutes = (routes: RouteConfig[], user: Realm.User | null): RouteConf
         if (route.path === '/logout' && !user) {
             return false;
         }
+        if (route.path === '/register' && user) {
+            return false
+        }
         return true;
     });
 }

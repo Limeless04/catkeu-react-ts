@@ -11,10 +11,11 @@ import Select from '@mui/material/Select';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import theme from "@styles/theme"
 import formFields from './FormFields'
+import { useHomeStores } from '@/stores/HomeStores';
+import { useShallow } from 'zustand/react/shallow';
 function HomePage() {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    const [value, setValue] = useState<string>('Harian');
-    const [toggleDialog, setToggleDialog] = useState<boolean>(false)
+    const [value, setValue, toggleDialog, setToggleDialog, recordType, setRecordType] = useHomeStores(useShallow(state => [state.value, state.setValue, state.toggleDialog, state.setToggleDialog, state.recordType, state.setRecordType]))
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
@@ -25,43 +26,67 @@ function HomePage() {
         setToggleDialog(newDialogOpen)
     }
 
-
-
     const handleFormSubmit = (formState: { [key: string]: string }) => {
         // Handle form submission
         console.log('Form submitted successfully:', formState);
     };
 
-    const [recordType, setRecordType] = useState<string>('income')
     const handleChangeType = (event: SelectChangeEvent) => {
         setRecordType(event.target.value as string)
     }
 
-
-
     return (
         <>
-            <TabMenu value={value} handleChange={handleChange} />
-            <Box sx={{ display: 'flex', justifyContent: "space-between", paddingTop: "35px" }}>
-                <FormControl sx={{ width: isMobile ? "40%" : "20%" }}>
-                    <InputLabel id="select-label">Type</InputLabel>
-                    <Select
-                        labelId="select-label"
-                        id="select"
-                        value={recordType}
-                        label="Type"
-                        onChange={handleChangeType}
-                    >
-                        <MenuItem value={"income"}>Income</MenuItem>
-                        <MenuItem value={"expenses"}>Expenses</MenuItem>
-                    </Select>
-                </FormControl>
-                <Button variant="contained" onClick={handleToggleDialog}><AddIcon /> Add {recordType} {value}</Button>
-            </Box>
+            {
+                isMobile ? (
+                    <>
+                        <TabMenu value={value} handleChange={handleChange} />
+                        <Box sx={{ display: 'flex', justifyContent: "space-between", paddingTop: "20px" }}>
+                            <FormControl sx={{ width: isMobile ? "40%" : "20%" }}>
+                                <InputLabel id="select-label">Type</InputLabel>
+                                <Select
+                                    labelId="select-label"
+                                    id="select"
+                                    value={recordType}
+                                    label="Type"
+                                    onChange={handleChangeType}
+                                >
+                                    <MenuItem value={"income"}>Income</MenuItem>
+                                    <MenuItem value={"expenses"}>Expenses</MenuItem>
+                                </Select>
+                            </FormControl>
+
+                            <Button variant="contained" onClick={handleToggleDialog}><AddIcon /> {recordType}</Button>
+                        </Box>
+
+                    </>
+                ) : (
+                    <Box sx={{ display: 'flex', justifyContent: "space-between", paddingTop: "20px" }}>
+                        <FormControl sx={{ width: isMobile ? "40%" : "20%" }}>
+                            <InputLabel id="select-label">Type</InputLabel>
+                            <Select
+                                labelId="select-label"
+                                id="select"
+                                value={recordType}
+                                label="Type"
+                                onChange={handleChangeType}
+                            >
+                                <MenuItem value={"income"}>Income</MenuItem>
+                                <MenuItem value={"expenses"}>Expenses</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <TabMenu value={value} handleChange={handleChange} />
+                        <Button variant="contained" onClick={handleToggleDialog} sx={{
+                            width: '100pt'
+                        }}><AddIcon /> {recordType}</Button>
+                    </Box>
+                )
+            }
+
             <ReuseableDialog
                 open={toggleDialog}
                 onClose={handleToggleDialog}
-                title={`Add New ` + recordType[0].toUpperCase() + recordType.slice(1)}
+                title={`New ` + recordType[0].toUpperCase() + recordType.slice(1) + ' ' + value}
                 actions={
                     <>
 

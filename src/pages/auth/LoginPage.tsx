@@ -1,16 +1,16 @@
 import React, { ChangeEvent, useState } from 'react';
-import { Container, TextField, Button, Typography, Box, CssBaseline, Avatar, Grid, Link, Paper } from '@mui/material';
+import { Container, TextField, Button, Typography, Box, CssBaseline, Avatar, Grid, CircularProgress } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth } from '@context/AuthContext';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 const theme = createTheme();
 
 const LoginPage = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const { login } = useAuth();
+    const { login, loading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -79,20 +79,15 @@ const LoginPage = () => {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign In
+                            {loading ? <CircularProgress size={24} color={'secondary'} /> : "Sign In"}
                         </Button>
-                        {/* <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
+                        <Grid container>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link to="/register">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
-                        </Grid> */}
+                        </Grid>
                     </Box>
                 </Box>
             </Container>

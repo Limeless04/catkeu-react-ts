@@ -17,7 +17,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlined';
-
+import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
 const DRAWERWIDTH: number = 240;
 const DRAWERWIDTHMOBILE: number = 180;
 interface SidebarProps {
@@ -54,6 +54,7 @@ const SidebarLink = ({ toggleSidebar }: SidebarLinkProps) => {
                             {route.icon === 'LoginOutlinedIcon' && <LoginOutlinedIcon />}
                             {route.icon === 'LogoutOutlinedIcon' && <LogoutOutlinedIcon />}
                             {route.icon === 'SpaceDashboardOutlinedIcon' && <SpaceDashboardOutlinedIcon />}
+                            {route.icon === 'PersonAddAlt1OutlinedIcon' && <PersonAddAlt1OutlinedIcon />}
                         </ListItemIcon>
                     )}
                     <ListItemText primary={route.label} />
