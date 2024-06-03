@@ -1,7 +1,11 @@
 import { useAuthStores } from "@/stores/AuthStore";
 import { useEffect, createContext, useContext, } from "react";
 import * as Realm from 'realm-web';
+const {
+    BSON: { ObjectId },
+} = Realm;
 import { useState } from "react";
+import { incomeExpense } from "@/types/IncomeExpense"
 
 const app = new Realm.App({ id: import.meta.env.VITE_REALM_APP_ID });
 
@@ -11,6 +15,7 @@ interface AuthContextType {
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
     register: (email: string, password: string) => Promise<void>
+    // getIncomeExpense: () => Promise<incomeExpense>
 }
 interface AuthProviderProps {
     children: React.ReactNode;
@@ -39,6 +44,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             setLoading(false);
         }
     };
+
+    // const getIncomeExpense = async (): Promise<incomeExpense> => {
+    //     if (!user) {
+    //         throw new Error("User is not logged in");
+    //     }
+    //     const mongo = user.mongoClient("mongodb-atlas");
+    //     const collection = mongo.db("catkeu").collection("income-expense");
+    //     const data = await collection.findOne({});
+    //     return data as incomeExpense
+    // }
 
     const logout = () => {
         if (user) {

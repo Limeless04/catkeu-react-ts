@@ -15,7 +15,12 @@ function Navbar({ toggleSidebar }: NavbarProps) {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
-        <AppBar position="fixed" sx={{ height: isMobile ? "50px" : "40px", paddingLeft: "10%", paddingRight: "10%" }}>
+        <AppBar position="fixed" sx={{
+            height: isMobile ? "50px" : "40px",
+            paddingLeft: "10%",
+            paddingRight: "10%",
+            backgrounColor: theme.palette.primary.darker
+        }}>
             <IconButton
                 color="inherit"
                 aria-label="open sidebar"

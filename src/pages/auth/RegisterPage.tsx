@@ -79,7 +79,13 @@ function RegisterPage() {
                         >
                             {loading ? <CircularProgress size={24} color={'secondary'} /> : "Sign Up"}
                         </Button>
-
+                        <Grid container>
+                            <Grid item>
+                                <Link to="/login">
+                                    {"Back To Login!"}
+                                </Link>
+                            </Grid>
+                        </Grid>
                     </Box>
                 </Box>
             </Container>
